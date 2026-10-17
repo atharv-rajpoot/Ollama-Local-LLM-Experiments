@@ -1,33 +1,32 @@
 # Ollama Local LLM Experiments
 
-A collection of Python experiments exploring local large language models (LLMs), text generation, LangChain integration, and text embeddings using Ollama.
-
-This project demonstrates how to download and run open-source models locally, interact with them through Python, and generate numerical representations of text for downstream machine learning applications.
+A collection of Python experiments exploring local Large Language Models (LLMs) using Ollama. This project demonstrates how to interact with language models, integrate Ollama with LangChain, and generate text embeddings using Nomic Embed Text.
 
 ## Project Structure
 
 | File | Description |
 |---|---|
-| `ollama_qwen_chat.py` | Text generation using Qwen 2.5 3B |
-| `ollama_chat_example.py` | Direct interaction with Llama 3.2 using Python |
-| `langchain_ollama_chat.py` | Llama 3.2 integration with LangChain |
-| `ollama_embeddings_example.py` | Text embeddings using Nomic Embed Text |
-| `requirements.txt` | Python dependencies |
+| `langchain_ollama_chat.py` | Interact with Llama 3.2 using LangChain |
+| `nomic-embed-text Model Testing.py` | Generate text and document embeddings using Nomic Embed Text |
+| `ollama_chat_example.py` | Interact with Llama 3.2 using the Ollama Python library |
+| `requirements.txt` | Python dependencies required by the project |
 
 ## Prerequisites
 
+Before running the project, ensure you have:
+
 - Python 3.10 or newer recommended
-- Ollama
-- Git (optional, for cloning the repository)
-- Sufficient memory and storage for local models
+- Ollama installed on your computer
+- Visual Studio Code (VS Code) or another Python-compatible IDE
+- An internet connection to download models and Python packages
 
 ## 1. Install Ollama
 
-Download Ollama from the official website:
+Download and install Ollama from its official website:
 
 https://ollama.com/download
 
-Verify the installation:
+After installation, open the terminal in VS Code or Command Prompt and verify that Ollama is installed:
 
 ```bash
 ollama --version
@@ -35,151 +34,157 @@ ollama --version
 
 ## 2. Download the Models
 
-Run these commands in your terminal:
+Download the models required for the experiments using the following commands:
+
+### Llama 3.2
 
 ```bash
-ollama pull qwen2.5:3b
 ollama pull llama3.2
+```
+
+Used for generating text responses through the Ollama Python library and LangChain.
+
+### Nomic Embed Text
+
+```bash
 ollama pull nomic-embed-text
 ```
 
-Check the downloaded models:
+Used to convert text into numerical embedding vectors.
+
+To view your downloaded models, run:
 
 ```bash
 ollama list
 ```
 
-## 3. Clone the Repository
+## 3. IDE Setup Using Visual Studio Code
 
-Replace `YOUR_USERNAME` with your GitHub username.
+1. Download and install [Visual Studio Code](https://code.visualstudio.com/).
+2. Install Python from [python.org](https://www.python.org/downloads/) if it is not already installed.
+3. Open VS Code and install the **Python** extension published by Microsoft.
+4. Open the folder containing your project files.
+5. Open the integrated terminal using **Terminal → New Terminal**.
+6. Verify Python is available:
 
-```bash
-git clone https://github.com/YOUR_USERNAME/ollama-local-llm-experiments.git
-cd ollama-local-llm-experiments
-```
+   ```bash
+   python --version
+   ```
 
-Alternatively, download the repository ZIP from GitHub and extract it.
+7. Select your Python interpreter using **Python: Select Interpreter** from the Command Palette.
 
-## 4. Create a Python Virtual Environment
+You can now execute the scripts from the VS Code terminal.
 
-### Windows
+## 4. Install Python Dependencies
 
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
+The project uses the following Python packages:
 
-If using Command Prompt:
+- `ollama`: Communicates with locally running Ollama models.
+- `langchain-ollama`: Integrates Ollama models with LangChain and provides chat and embedding interfaces.
 
-```bat
-.venv\Scripts\activate.bat
-```
-
-### Linux or macOS
+Install the dependencies using `requirements.txt`:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Upgrade pip and install the dependencies:
-
-```bash
-python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-## 5. Install Dependencies Manually
-
-If you prefer to install the packages individually:
+Alternatively, install them individually:
 
 ```bash
 python -m pip install ollama
 python -m pip install langchain-ollama
 ```
 
-## 6. Run the Experiments
+## 5. Run the Python Scripts
 
-Ensure Ollama is running and the required model has been downloaded.
+Ensure Ollama is running and the required models have been downloaded before executing the scripts.
 
-### Qwen 2.5 3B
+### A. LangChain Chat
 
-```bash
-python ollama_qwen_chat.py
-```
+**File:** `langchain_ollama_chat.py`
 
-Explores text generation and questions about machine learning using Qwen 2.5 3B.
-
-### Llama 3.2 with Python
-
-```bash
-python ollama_chat_example.py
-```
-
-Sends a prompt to Llama 3.2 using the Ollama Python package.
-
-### Llama 3.2 with LangChain
+Run:
 
 ```bash
 python langchain_ollama_chat.py
 ```
 
-Uses LangChain's `ChatOllama` integration to generate a response.
+This script uses LangChain's `ChatOllama` integration to send a prompt to Llama 3.2 and print the generated response.
 
-### Text Embeddings with Nomic
+### B. Text Embeddings
 
-```bash
-python ollama_embeddings_example.py
-```
+**File:** `nomic-embed-text Model Testing.py`
 
-Generates embeddings for text and documents using `nomic-embed-text`.
-
-## 7. Useful Ollama Commands
-
-Run a model interactively:
+Run:
 
 ```bash
-ollama run llama3.2
+python "nomic-embed-text Model Testing.py"
 ```
 
-List available local models:
+This script uses `OllamaEmbeddings` to generate embeddings for a sentence and a list of text documents. It prints the embedding vector length and the number of document embeddings generated.
+
+### C. Direct Ollama Chat
+
+**File:** `ollama_chat_example.py`
+
+Run:
 
 ```bash
-ollama list
+python ollama_chat_example.py
 ```
 
-Check currently running models:
+This script uses the Ollama Python library to send a question to Llama 3.2 and display its response.
+
+## 6. Useful Ollama Commands
+
+| Command | Purpose |
+|---|---|
+| `ollama --version` | Check the installed Ollama version |
+| `ollama list` | List downloaded models |
+| `ollama pull llama3.2` | Download Llama 3.2 |
+| `ollama pull nomic-embed-text` | Download Nomic Embed Text |
+| `ollama run llama3.2` | Start an interactive chat session |
+| `ollama ps` | View currently running models |
+
+## 7. Troubleshooting
+
+**Ollama connection error**
+
+Ensure the Ollama application or service is running. The default local API endpoint is `http://localhost:11434`.
+
+**Model not found**
+
+Download the required model using the appropriate `ollama pull` command.
+
+**Module not found**
+
+Install the project dependencies:
 
 ```bash
-ollama ps
+python -m pip install -r requirements.txt
 ```
 
-Download a model:
+**Python command not recognized**
 
-```bash
-ollama pull MODEL_NAME
-```
+Ensure Python is installed and available in your system PATH. On some systems, you may need to use `python3` instead of `python`.
 
-## Troubleshooting
+**Slow model responses**
 
-**Connection refused:** Ensure the Ollama application or service is running.
+Inference speed depends on your available RAM, processor, GPU support, and the size of the model.
 
-**Model not found:** Download the required model using `ollama pull`.
+## 8. Key Concepts
 
-**Module not found:** Activate the virtual environment and install the dependencies.
+- Running open-source LLMs locally
+- Generating text using Ollama
+- Integrating language models with LangChain
+- Generating text and document embeddings
+- Using Python libraries to interact with local AI models
 
-**Slow inference:** Performance depends on available RAM, processor, GPU support, and model size.
+## 9. Notes
 
-## Key Concepts Explored
-
-- Local inference with open-source LLMs
-- Python-based text generation
-- LangChain integration with Ollama
-- Text and document embeddings
-- Python virtual environments and dependency management
-
-## Notes
-
-- Models are downloaded separately and are not stored in this repository.
+- Ollama manages model downloads separately from the Python project.
 - An internet connection is required for initial model and package downloads.
-- Model responses and inference times may vary depending on hardware and model configuration.
+- After the models are downloaded, inference can generally run locally without a hosted LLM API.
+- Model performance depends on the hardware available.
+- This repository is intended for learning, experimentation, and exploring local AI applications.
+
