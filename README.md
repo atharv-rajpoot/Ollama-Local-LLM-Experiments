@@ -266,3 +266,66 @@ Inference performance depends on RAM, CPU, GPU support, and model size. Close un
 - The embedding script requires the `nomic-embed-text` model, while the chat scripts require their respective chat models.
 - Model performance depends on the hardware available.
 
+## 10. Essential Ollama Commands
+
+These commands help manage Ollama, download models, run local LLMs, and remove models when they are no longer needed.
+
+| Command | Description |
+|---|---|
+| `ollama` | Display available commands and help |
+| `ollama --version` | Check the installed Ollama version |
+| `ollama serve` | Start the Ollama server manually if it is not already running |
+| `ollama pull <model>` | Download a model |
+| `ollama list` | List downloaded models |
+| `ollama run <model>` | Run a model interactively |
+| `ollama rm <model>` | Remove a downloaded model |
+| `ollama ps` | Display models currently running in memory |
+| `ollama show <model>` | Display model information |
+| `ollama stop <model>` | Stop a running model |
+| `ollama cp <source> <destination>` | Copy a model under a different name |
+
+### Examples
+
+**1. Download a model**
+```bash
+ollama pull llama3.2
+```
+
+**2. List downloaded models**
+```bash
+ollama list
+```
+
+**3. Run a model**
+```bash
+ollama run llama3.2
+```
+
+Type `/bye` to exit the interactive chat session.
+
+**4. Remove a model**
+```bash
+ollama rm llama3.2
+```
+
+**5. Check running models**
+```bash
+ollama ps
+```
+
+**6. View model information**
+```bash
+ollama show qwen2.5:3b
+```
+
+**7. Stop a running model**
+```bash
+ollama stop llama3.2
+```
+
+**8. Start the Ollama server manually**
+```bash
+ollama serve
+```
+
+> **Note:** Replace model names with the appropriate names from `ollama list`. Ollama usually runs automatically in the background after installation, so you only need `ollama serve` if the server is not already running.
